@@ -26,25 +26,31 @@ const run = async () => {
     }
   })
 
-  app.get('/dbtest', async (req, res) => {
+  /* VEHICLE DB ACTIONS ----------------------------------- */
+
+  app.get('/vehicles', async (req, res) => {
     const result = await dbCollection.find({}).toArray();
     res.json(result);
   });
 
-  app.post('/dbtest', async (req, res) => {
+  app.post('/vehicles', async (req, res) => {
     const result = await dbCollection.insertOne(req.body);
     res.json(result);
   });
 
-  app.put('/dbtest', async (req, res) => {
+  app.put('/vehicles', async (req, res) => {
     const result = await dbCollection.updateOne(
       { _id: new ObjectId(req.body._id) },
-      { $set: { name: req.body.name }} // assuming an object with a "name" field
+      { $set: { 
+        year: req.body.year,
+        model: req.body.model,
+        mpg: req.body.mpg,
+      }}
     );
     res.json(result);
   });
 
-  app.delete('/dbtest', async (req, res) => {
+  app.delete('/vehicles', async (req, res) => {
     const result = await dbCollection.deleteOne({
       _id: new ObjectId(req.body._id)
     });
