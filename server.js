@@ -26,6 +26,21 @@ const run = async () => {
     }
   })
 
+  /* BUSINESS LOGIC --------------------------------------- */
+  const estimateValue = (item) => {
+    const basePrice = 27500
+    const depreciationRate = 0.075
+    const avgMpg = 25
+
+    const age = new Date().getFullYear() - item.year
+    const mpg = item.mpg
+    
+    const ageFactor = (1 - depreciationRate) ** age
+    const mpgFactor = Math.sqrt(mpg / avgMpg)
+
+    return Math.round(basePrice * ageFactor * mpgFactor)
+  };
+
   /* VEHICLE DB ACTIONS ----------------------------------- */
 
   app.get('/vehicles', async (req, res) => {
@@ -34,18 +49,28 @@ const run = async () => {
   });
 
   app.post('/vehicles', async (req, res) => {
-    const result = await dbCollection.insertOne(req.body);
+    let vehicle = {
+      year: req.body.year,
+      model: req.body.model,
+      mpg: req.body.mpg,
+    };
+    vehicle.val = estimateValue(vehicle);
+
+    const result = await dbCollection.insertOne(vehicle);
     res.json(result);
   });
 
   app.put('/vehicles', async (req, res) => {
+    let vehicle = {
+      year: req.body.year,
+      model: req.body.model,
+      mpg: req.body.mpg,
+    };
+    vehicle.val = estimateValue(vehicle);
+
     const result = await dbCollection.updateOne(
       { _id: new ObjectId(req.body._id) },
-      { $set: { 
-        year: req.body.year,
-        model: req.body.model,
-        mpg: req.body.mpg,
-      }}
+      { $set: vehicle }
     );
     res.json(result);
   });

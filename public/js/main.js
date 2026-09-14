@@ -28,8 +28,8 @@ const displayVehicles = (vehicles) => {
 
   for (const v of vehicles) {
     const vehicleItem = document.createElement('li');
-    vehicleItem.className = 'vehicle-item';
-    vehicleItem.innerText = `${v.year} ${v.model} (${v.mpg} MPG)`;
+    vehicleItem.className = 'vehicle-item pure-g';
+    vehicleItem.innerHTML = `<p style="text-align:center" class="pure-u-1-4">${v.year} ${v.model} (${v.mpg} MPG)</p><p style="text-align:center" class="pure-u-5-8">Estimated Value: $${v.val}</p>`;
 
     vehicleItem.addEventListener('click', (event) => {
       event.preventDefault();
@@ -38,8 +38,8 @@ const displayVehicles = (vehicles) => {
     
     const vehicleItemDeleteButton = document.createElement('button');
     vehicleItemDeleteButton.type = 'button';
-    vehicleItemDeleteButton.className = 'vehicle-item-delete-button';
-    vehicleItemDeleteButton.innerText = 'delete';
+    vehicleItemDeleteButton.className = 'vehicle-item-delete-button pure-button button-delete pure-u-1-8';
+    vehicleItemDeleteButton.innerText = 'Delete';
     vehicleItemDeleteButton.addEventListener('click', (event) => {
       event.preventDefault();
       deleteVehicle(v);
@@ -93,27 +93,42 @@ const submit = async () => {
 // Open edit form on a vehicle-item
 const editVehicle = (oldVehicle, vehicleItemElement) => {
   const editForm = document.createElement('form');
+  editForm.id = 'edit-form';
+  editForm.className = 'pure-form pure-g';
   
-  const createInput = (id, name) => {
+  const createInput = (type, id, name) => {
     const label = document.createElement('label');
+    label.className = 'pure-u-1-4';
     const input = document.createElement('input');
-    input.type = 'text';
+    input.type = type;
+    input.required = true;
     input.id = `edit-${id}-input`;
     input.value = oldVehicle[id];
-    label.innerText = name ?? id;
+    label.innerText = `${name ?? id} `;
     label.appendChild(input);
     return { label, input };
   };
 
-  const editYear = createInput('year', 'Year');
-  const editModel = createInput('model', 'Model');
-  const editMpg = createInput('mpg', 'MPG');
+  const editYear = createInput('number', 'year', 'Year');
+  const editModel = createInput('text', 'model', 'Model');
+  const editMpg = createInput('number', 'mpg', 'MPG');
 
   editForm.appendChild(editYear.label);
   editForm.appendChild(editModel.label);
   editForm.appendChild(editMpg.label);
 
+  const editCancelButton = document.createElement('button');
+  editCancelButton.type = 'button';
+  editCancelButton.className = 'pure-button button-cancel pure-u-1-8';
+  editCancelButton.innerText = 'Cancel';
+  editCancelButton.addEventListener('click', async (event) => {
+    await loadVehicles();
+  });
+  editForm.appendChild(editCancelButton);
+
   const editSubmitButton = document.createElement('button');
+  editSubmitButton.className = 'pure-button button-submit pure-u-1-8';
+  editSubmitButton.innerText = 'Submit';
   editSubmitButton.addEventListener('click', async (event) => {
     event.preventDefault();
     const vehicle = {
@@ -128,13 +143,18 @@ const editVehicle = (oldVehicle, vehicleItemElement) => {
     }
     updateVehicle(vehicle);
   });
-  editSubmitButton.innerText = 'Submit';
   editForm.appendChild(editSubmitButton);
 
   const vehicleItemEditElement = document.createElement('li');
   vehicleItemEditElement.className = 'vehicle-item editing';
   vehicleItemEditElement.appendChild(editForm);
   vehicleItemElement.replaceWith(vehicleItemEditElement);
+  
+  // document.onclick = async (event) => {
+  //   if (document.getElementById('edit-form') && event.target !== editForm) {
+  //     await loadVehicles();
+  //   }
+  // };
 };
 
 /* INTERACT WITH THE BACKEND ------------------------------ */

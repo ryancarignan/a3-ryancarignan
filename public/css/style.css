@@ -2,6 +2,8 @@ body {
   --primary: #303066;
   --secondary-light: #F8F8FF;
   --secondary-dark: #BBBBFF;
+  --success: #BAFFD4;
+  --error: #FFBDBA;
 
   /*
   * Created with https://www.css-gradient.com
@@ -32,16 +34,15 @@ body > * {
 }
 
 #description,
-#vehicle-list,
 .vehicle-item,
 #add-vehicle-form,
 #add-vehicle-block,
 #vehicle-list-block,
-button {
+button.pure-button {
   box-sizing: border-box;
   padding: 10px;
   border: 1px solid var(--secondary-dark);
-  border-radius: 10px;
+  border-radius: 3px;
 }
 
 #description,
@@ -68,22 +69,38 @@ button {
 }
 
 .vehicle-item {
-  display: flex;
+  /* display: flex;
   justify-content: space-evenly;
-  align-items: baseline;
+  align-items: baseline; */
   & > form {
     width: 100%;
   }
 }
 
-form {
-  display: flex;
+.pure-button {
+  &.button-submit {
+    background-color: var(--success);
+  }
+  &.button-delete {
+    background-color: var(--error);
+  }
+}
+
+form.pure-form {
+  /* display: flex;
   justify-content: space-evenly;
-  align-items: baseline;
+  align-items: baseline; */
   & > label {
     display: flex;
     align-items: baseline;
     gap: 5px;
+    box-sizing: border-box;
+    padding: 2px;
+
+    & > input {
+      min-width: 0;
+      flex: 1;
+    }
   }
 }
 
