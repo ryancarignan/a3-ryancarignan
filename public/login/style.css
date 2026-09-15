@@ -25,3 +25,10 @@ body {
 form.pure-form input {
   width: 100%;
 }
+
+#error-msg {
+  background-color: var(--error);
+  border: 1px solid var(--secondary-dark);
+  border-radius: 3px;
+  padding: 3px;
+}

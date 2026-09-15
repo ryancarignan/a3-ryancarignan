@@ -33,6 +33,7 @@ const login = async () => {
       const errorMsg = document.createElement('p');
       errorMsg.id = 'error-msg';
       errorMsg.innerText = 'Login unsuccessful; please check credentials.';
+      document.body.appendChild(errorMsg);
     }
   }
 };
