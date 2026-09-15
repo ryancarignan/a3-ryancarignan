@@ -86,6 +86,12 @@ button.pure-button {
   }
 }
 
+#logout-button {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
 form.pure-form {
   /* display: flex;
   justify-content: space-evenly;
