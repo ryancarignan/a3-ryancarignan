@@ -41,7 +41,8 @@ const run = async () => {
     if (
       (req.path === '/login' && req.method === 'POST') ||
       (req.path === '/create-account' && req.method === 'POST') ||
-      (req.path === '/logout' && req.method === 'POST')
+      (req.path === '/logout' && req.method === 'POST') ||
+      (req.path === '/robots.txt' && req.method === 'GET')
     ) {
       next();
     } else if (req.session?.userId) {

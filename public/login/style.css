@@ -17,9 +17,20 @@ body {
   height: 100vh;
 
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: ghostwhite;
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid var(--secondary-dark);
 }
 
 form.pure-form input {
@@ -31,4 +42,8 @@ form.pure-form input {
   border: 1px solid var(--secondary-dark);
   border-radius: 3px;
   padding: 3px;
+}
+
+.pure-button-primary {
+  background-color: var(--primary);
 }
