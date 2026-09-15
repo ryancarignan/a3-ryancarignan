@@ -1,6 +1,6 @@
 # a3-ryancarignan
 
-(Link to project via render.)[https://a3-ryancarignan.onrender.com/]
+[Link to project via render.](https://a3-ryancarignan.onrender.com/)
 
 ## Description
 
@@ -10,10 +10,10 @@ One challenge I faced was implementing the redirection of unauthenticated users 
 
 I chose to implement simple cookie-based authentication, because it seemed easiest for a small site like this which doesn't necessarily need to worry so much about valuable user data being stored in it.
 
-I used (Pure.css)[https://pure-css.github.io/] for the CSS framework, because it provides lightweight baseline styling for forms and grid formatting, which all this site really needs. Pure is pretty small so there was a decent bit of custom CSS used, mostly for centering items, custom colors, and aligning border styling with the Pure standards.
+I used [Pure.css](https://pure-css.github.io/) for the CSS framework, because it provides lightweight baseline styling for forms and grid formatting, which all this site really needs. Pure is pretty small so there was a decent bit of custom CSS used, mostly for centering items, custom colors, and aligning border styling with the Pure standards.
 
 ## Technical Achievements
-- **100% Lighthouse Tests**: I got 100% in the four lighthouse tests required for both the login page and the main content page. The two reports are provided ((login page)[./lighthouse-report-login.pdf], (main page)[./lighthouse-report-main.pdf]).
+- **100% Lighthouse Tests**: I got 100% in the four lighthouse tests required for both the login page and the main content page. The two reports are provided ([login page](./lighthouse-report-login.pdf), [main page](./lighthouse-report-main.pdf)).
 - **Express Middleware Packages**: I used `cookie-session` to manage user session cookies.
 
 ### Design/Evaluation Achievements
