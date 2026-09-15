@@ -6,6 +6,22 @@ window.onload = async () => {
     event.preventDefault();
     submit();
   });
+
+  const logoutButton = document.getElementById('logout-button');
+  logoutButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    logout();
+  });
+};
+
+const logout = async () => {
+  const response = await fetch('/logout', {
+    method: 'POST',
+  });
+
+  if (response.ok) {
+    window.location.assign('/login/index.html');
+  }
 };
 
 /* INTERACT WITH THE WEB PAGE ----------------------------- */
